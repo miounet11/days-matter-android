@@ -65,6 +65,14 @@
     </style>
 
     <style name="Theme.BigTime" parent="Base.Theme.BigTime" />
+    
+    <!-- NoActionBar theme for full screen activities -->
+    <style name="Theme.BigTime.NoActionBar" parent="Theme.BigTime">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
     <!-- Text Appearances -->
     <style name="TextAppearance.BigTime.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">

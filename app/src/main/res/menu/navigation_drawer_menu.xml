@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_star_24"
+            android:title="首页事件" />
+        
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/ic_baseline_apps_24"
+            android:title="全部" />
+            
+        <item
+            android:id="@+id/nav_life"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="生活" />
+            
+        <item
+            android:id="@+id/nav_work"
+            android:icon="@drawable/ic_baseline_work_24"
+            android:title="工作" />
+            
+        <item
+            android:id="@+id/nav_anniversary"
+            android:icon="@drawable/ic_baseline_cake_24"
+            android:title="纪念日" />
+    </group>
+
+    <item android:title="管理">
+        <menu>
+            <item
+                android:id="@+id/nav_notebooks"
+                android:icon="@drawable/ic_baseline_edit_24"
+                android:title="管理本子" />
+                
+            <item
+                android:id="@+id/nav_countdown_book"
+                android:icon="@drawable/ic_baseline_menu_book_24"
+                android:title="倒数本" />
+        </menu>
+    </item>
+
+    <item android:title="发现">
+        <menu>
+            <item
+                android:id="@+id/nav_history_today"
+                android:icon="@drawable/ic_baseline_history_24"
+                android:title="历史上的今天" />
+                
+            <item
+                android:id="@+id/nav_my_days_icity"
+                android:icon="@drawable/ic_baseline_account_circle_24"
+                android:title="我的倒数日 · iCity" />
+        </menu>
+    </item>
+
+    <item android:title="更多">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="设置" />
+                
+            <item
+                android:id="@+id/nav_more"
+                android:icon="@drawable/ic_baseline_more_horiz_24"
+                android:title="更多" />
+        </menu>
+    </item>
+
+</menu>

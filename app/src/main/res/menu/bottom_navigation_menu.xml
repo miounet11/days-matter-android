@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item
+        android:id="@+id/navigation_countdown"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
+        android:title="倒数日" />
+        
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="收藏" />
+        
+    <item
+        android:id="@+id/navigation_explore"
+        android:icon="@drawable/ic_baseline_explore_24"
+        android:title="探索" />
+        
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="个人" />
+        
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:title="更多" />
+        
+</menu>

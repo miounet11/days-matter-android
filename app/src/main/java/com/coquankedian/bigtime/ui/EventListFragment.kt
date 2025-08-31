@@ -9,12 +9,13 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.coquankedian.bigtime.R
 import com.coquankedian.bigtime.data.model.Event
 import com.coquankedian.bigtime.data.repository.AppRepository
 import com.coquankedian.bigtime.databinding.FragmentEventListBinding
-import com.coquankedian.bigtime.ui.adapter.EventAdapter
+import com.coquankedian.bigtime.ui.adapter.EventDaysMatterAdapter
 import com.coquankedian.bigtime.ui.EventViewModel
 import com.coquankedian.bigtime.ui.EventViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
@@ -25,7 +26,8 @@ class EventListFragment : Fragment() {
     private var _binding: com.coquankedian.bigtime.databinding.FragmentEventListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var eventAdapter: EventAdapter
+    private lateinit var eventAdapter: EventDaysMatterAdapter
+    private var isGridView = false
 
     // TODO: Use proper dependency injection
     private val eventViewModel: EventViewModel by lazy {
@@ -53,21 +55,31 @@ class EventListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        eventAdapter = com.coquankedian.bigtime.ui.adapter.EventAdapter(
+        eventAdapter = com.coquankedian.bigtime.ui.adapter.EventDaysMatterAdapter(
             onEventClick = { event ->
                 showEventDetails(event)
             },
             onEventLongClick = { event ->
                 showEventMenu(event)
-            },
-            getCategoryName = { categoryId ->
-                getCategoryName(categoryId)
             }
         )
 
         binding.recyclerViewEvents.apply {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+            layoutManager = if (isGridView) {
+                GridLayoutManager(requireContext(), 2)
+            } else {
+                LinearLayoutManager(requireContext())
+            }
             adapter = eventAdapter
+        }
+    }
+    
+    fun setViewMode(gridView: Boolean) {
+        isGridView = gridView
+        binding.recyclerViewEvents.layoutManager = if (isGridView) {
+            GridLayoutManager(requireContext(), 2)
+        } else {
+            LinearLayoutManager(requireContext())
         }
     }
 
@@ -80,9 +92,31 @@ class EventListFragment : Fragment() {
     }
 
     private fun observeEvents() {
-        eventViewModel.allEvents.observe(viewLifecycleOwner) { events ->
+        // Observe filtered events instead of all events
+        eventViewModel.filteredEvents.observe(viewLifecycleOwner) { events ->
             updateEventList(events)
         }
+        
+        // Also observe pinned events for the top card
+        eventViewModel.pinnedEvents.observe(viewLifecycleOwner) { pinnedEvents ->
+            updatePinnedEventCard(pinnedEvents.firstOrNull())
+        }
+    }
+    
+    fun filterByCategory(categoryId: Long?, pinnedOnly: Boolean) {
+        if (pinnedOnly) {
+            // Show only pinned events
+            eventViewModel.pinnedEvents.observe(viewLifecycleOwner) { events ->
+                updateEventList(events)
+            }
+        } else {
+            // Apply category filter
+            eventViewModel.setCategoryFilter(categoryId)
+        }
+    }
+    
+    private fun updatePinnedEventCard(event: Event?) {
+        // TODO: Update the pinned event card in the main layout
     }
 
     private fun updateEventList(events: List<Event>) {
@@ -98,8 +132,11 @@ class EventListFragment : Fragment() {
     }
 
     private fun showEventDetails(event: Event) {
-        val dialog = com.coquankedian.bigtime.ui.dialog.AddEditEventDialog.newInstance(event)
-        dialog.show(childFragmentManager, "EditEventDialog")
+        // Open full screen event detail activity
+        val intent = android.content.Intent(requireContext(), EventDetailActivity::class.java).apply {
+            putExtra(EventDetailActivity.EXTRA_EVENT_ID, event.id)
+        }
+        startActivity(intent)
     }
 
     private fun showEventMenu(event: Event) {

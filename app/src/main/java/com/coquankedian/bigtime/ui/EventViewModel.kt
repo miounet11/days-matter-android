@@ -7,8 +7,44 @@ import kotlinx.coroutines.launch
 
 class EventViewModel(private val repository: AppRepository) : ViewModel() {
 
-    val allEvents: LiveData<List<Event>> = repository.allActiveEvents.asLiveData()
+    // Current filter state
+    private val _currentCategoryFilter = MutableLiveData<Long?>(null)
+    val currentCategoryFilter: LiveData<Long?> = _currentCategoryFilter
+    
+    // Pinned events
+    val pinnedEvents: LiveData<List<Event>> = repository.getPinnedEvents().asLiveData()
+    
+    // All active events (sorted with pinned at top)
+    val allEvents: LiveData<List<Event>> = repository.allActiveEvents
+        .asLiveData()
+        .map { events ->
+            events.sortedWith(compareBy(
+                { !it.isPinned }, // Pinned events first
+                { it.daysUntil }  // Then by days until
+            ))
+        }
+    
     val archivedEvents: LiveData<List<Event>> = repository.allArchivedEvents.asLiveData()
+    
+    // Filtered events based on current category
+    val filteredEvents: LiveData<List<Event>> = _currentCategoryFilter.switchMap { categoryId ->
+        if (categoryId == null) {
+            allEvents
+        } else {
+            repository.getEventsByCategory(categoryId)
+                .asLiveData()
+                .map { events ->
+                    events.sortedWith(compareBy(
+                        { !it.isPinned },
+                        { it.daysUntil }
+                    ))
+                }
+        }
+    }
+    
+    fun setCategoryFilter(categoryId: Long?) {
+        _currentCategoryFilter.value = categoryId
+    }
 
     fun getEventsByCategory(categoryId: Long): LiveData<List<Event>> =
         repository.getEventsByCategory(categoryId).asLiveData()

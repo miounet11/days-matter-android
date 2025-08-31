@@ -79,14 +79,21 @@ class EventAdapter(
                 tvEventDescription.setTextColor(event.textColor)
                 tvEventDate.setTextColor(event.textColor)
 
-                // Set category chip background color
+                // Set category chip background color using theme colors
+                val context = root.context
                 val categoryColor = when (event.categoryId) {
                     1L -> android.graphics.Color.parseColor("#FF6B9D") // Anniversary
                     2L -> android.graphics.Color.parseColor("#4ECDC4") // Work
                     3L -> android.graphics.Color.parseColor("#45B7D1") // Life
                     else -> android.graphics.Color.parseColor("#9C27B0") // Custom
                 }
-                tvCategory.setBackgroundColor(categoryColor)
+
+                // Create a background drawable with the category color
+                val backgroundDrawable = android.graphics.drawable.GradientDrawable().apply {
+                    setColor(categoryColor)
+                    cornerRadius = 16f
+                }
+                tvCategory.background = backgroundDrawable
 
                 // Set custom icon if available
                 event.iconResId?.let { iconResId ->

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Event Title -->
+        <TextView
+            android:id="@+id/tvEventTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="测试就是今天" />
+
+        <!-- Days Count -->
+        <TextView
+            android:id="@+id/tvDaysCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/primary"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            tools:text="0" />
+
+        <!-- Days Label -->
+        <TextView
+            android:id="@+id/tvDaysLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/days_label_background"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="天"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+        <!-- Target Date -->
+        <TextView
+            android:id="@+id/tvTargetDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            tools:text="2025-8-31 星期日" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Day Counter</string>
+    <string name="app_name">Days Matter · 倒数日</string>
 
     <!-- Tab titles -->
     <string name="tab_all_events">全部事件</string>
@@ -41,5 +41,8 @@
     <string name="is_today">就在今天！</string>
     <string name="days_remaining">还有 %d 天</string>
     <string name="one_day_remaining">还有 1 天</string>
+    
+    <!-- Menu items -->
+    <string name="action_settings">设置</string>
 
 </resources>

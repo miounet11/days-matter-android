@@ -20,12 +20,11 @@
 
     <TextView
         android:id="@+id/tvEmptyTitle"
+        style="@style/TextAppearance.BigTime.HeadlineSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/no_events_title"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvEmptyMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +32,12 @@
 
     <TextView
         android:id="@+id/tvEmptyMessage"
+        style="@style/TextAppearance.BigTime.BodyMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/no_events_message"
-        android:textColor="?android:textColorSecondary"
+        android:textColor="@color/on_surface_variant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

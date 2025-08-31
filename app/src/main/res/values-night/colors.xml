@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Basic colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Material Design 3 Color System - Dark Mode -->
+    <!-- Primary Colors - Days Matter Blue Dark -->
+    <color name="primary">#6BA3E8</color>
+    <color name="on_primary">#1A5490</color>
+    <color name="primary_container">#2C5F8D</color>
+    <color name="on_primary_container">#D4E4F7</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#CCC2DC</color>
+    <color name="on_secondary">#332D41</color>
+    <color name="secondary_container">#4A4458</color>
+    <color name="on_secondary_container">#E8DEF8</color>
+
+    <!-- Tertiary Colors -->
+    <color name="tertiary">#EFB8C8</color>
+    <color name="on_tertiary">#492532</color>
+    <color name="tertiary_container">#633B48</color>
+    <color name="on_tertiary_container">#FFD8E4</color>
+
+    <!-- Error Colors -->
+    <color name="error">#F2B8B5</color>
+    <color name="on_error">#601410</color>
+    <color name="error_container">#8C1D18</color>
+    <color name="on_error_container">#FFDAD6</color>
+
+    <!-- Surface Colors -->
+    <color name="surface">#141218</color>
+    <color name="on_surface">#E6E1E5</color>
+    <color name="surface_variant">#49454F</color>
+    <color name="on_surface_variant">#CAC4D0</color>
+
+    <!-- Background Colors -->
+    <color name="background">#141218</color>
+    <color name="on_background">#E6E1E5</color>
+
+    <!-- Outline Colors -->
+    <color name="outline">#938F99</color>
+    <color name="outline_variant">#49454F</color>
+
+    <!-- Special Colors for Days Matter style - Dark Mode -->
+    <!-- Event card colors -->
+    <color name="event_card_background">#1C1B1F</color>
+    <color name="event_card_shadow">#0F000000</color>
+
+    <!-- Countdown colors -->
+    <color name="countdown_today">#81C784</color>
+    <color name="countdown_soon">#FFB74D</color>
+    <color name="countdown_future">#64B5F6</color>
+    <color name="countdown_past">#B0BEC5</color>
+
+    <!-- Category colors -->
+    <color name="category_anniversary">#FF8A9D</color>
+    <color name="category_work">#4DD0E1</color>
+    <color name="category_life">#81C784</color>
+    <color name="category_custom">#BA68C8</color>
+
+    <!-- Gradient colors for backgrounds -->
+    <color name="gradient_start">#667EEA</color>
+    <color name="gradient_end">#764BA2</color>
+
+    <!-- Widget colors -->
+    <color name="widget_background_start">#4CAF50</color>
+    <color name="widget_background_end">#2196F3</color>
+
+</resources>

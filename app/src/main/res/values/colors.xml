@@ -5,11 +5,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Material Design 3 Color System -->
-    <!-- Primary Colors -->
-    <color name="primary">#6750A4</color>
+    <!-- Primary Colors - Days Matter Blue -->
+    <color name="primary">#4A90E2</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="primary_container">#EADDFF</color>
-    <color name="on_primary_container">#21005D</color>
+    <color name="primary_container">#D4E4F7</color>
+    <color name="on_primary_container">#1A5490</color>
 
     <!-- Secondary Colors -->
     <color name="secondary">#625B71</color>
@@ -47,18 +47,22 @@
     <!-- Event card colors -->
     <color name="event_card_background">#FFFFFF</color>
     <color name="event_card_shadow">#1F000000</color>
+    <color name="event_card_divider">#E0E0E0</color>
+    <color name="days_label_background">#E74C3C</color>
+    <color name="days_label_text">#FFFFFF</color>
 
-    <!-- Countdown colors -->
-    <color name="countdown_today">#4CAF50</color>
-    <color name="countdown_soon">#FF9800</color>
-    <color name="countdown_future">#2196F3</color>
-    <color name="countdown_past">#757575</color>
+    <!-- Countdown colors - Days Matter Style -->
+    <color name="countdown_today">#27AE60</color>
+    <color name="countdown_soon">#FF8C42</color>
+    <color name="countdown_future">#4A90E2</color>
+    <color name="countdown_past">#95A5A6</color>
 
-    <!-- Category colors -->
-    <color name="category_anniversary">#FF6B9D</color>
-    <color name="category_work">#4ECDC4</color>
-    <color name="category_life">#45B7D1</color>
-    <color name="category_custom">#9C27B0</color>
+    <!-- Category colors - Days Matter Style -->
+    <color name="category_anniversary">#E74C3C</color>
+    <color name="category_work">#4A90E2</color>
+    <color name="category_life">#FF8C42</color>
+    <color name="category_custom">#9B59B6</color>
+    <color name="category_all">#757575</color>
 
     <!-- Gradient colors for backgrounds -->
     <color name="gradient_start">#667EEA</color>
@@ -67,5 +71,13 @@
     <!-- Widget colors -->
     <color name="widget_background_start">#4CAF50</color>
     <color name="widget_background_end">#2196F3</color>
+    
+    <!-- Text Colors - Days Matter Style -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    
+    <!-- Divider Color -->
+    <color name="divider">#E0E0E0</color>
 
 </resources>

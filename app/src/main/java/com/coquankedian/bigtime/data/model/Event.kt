@@ -32,6 +32,14 @@ data class Event(
     val textColor: Int = android.graphics.Color.parseColor("#000000"), // Text color
     val reminderEnabled: Boolean = false,
     val reminderMinutes: Int = 1440, // Default 1 day before
+    val isCountingUp: Boolean = false, // false for countdown (future), true for count up (past)
+    val repeatType: String = "NONE", // NONE, DAILY, WEEKLY, MONTHLY, YEARLY
+    val isLunarCalendar: Boolean = false, // Use lunar calendar
+    val endDate: Date? = null, // Optional end date for events
+    val preciseTime: String? = null, // Precise time in HH:mm format
+    val plusOneDay: Boolean = false, // Add one day adjustment
+    val highlightColor: Int? = null, // Highlight color for special events
+    val notebookId: Long? = null, // Countdown notebook/collection ID
     val createdAt: Date = Date(),
     val updatedAt: Date = Date()
 ) {

@@ -15,6 +15,8 @@ class AppRepository(
     val allActiveEvents: Flow<List<Event>> = eventDao.getAllActiveEvents()
     val allArchivedEvents: Flow<List<Event>> = eventDao.getAllArchivedEvents()
     val activeEventsCount: Flow<Int> = eventDao.getActiveEventsCount()
+    
+    fun getPinnedEvents(): Flow<List<Event>> = eventDao.getPinnedEvents()
 
     fun getEventsByCategory(categoryId: Long): Flow<List<Event>> =
         eventDao.getEventsByCategory(categoryId)

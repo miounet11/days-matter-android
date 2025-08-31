@@ -9,18 +9,18 @@
 
     <TextView
         android:id="@+id/tvDialogTitle"
+        style="@style/TextAppearance.BigTime.HeadlineSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="添加新事件"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEventTitle"
+        style="@style/TextInput.BigTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -40,6 +40,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEventDescription"
+        style="@style/TextInput.BigTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -59,11 +60,11 @@
 
     <TextView
         android:id="@+id/tvDateLabel"
+        style="@style/TextAppearance.BigTime.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="选择日期"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilEventDescription" />
 
@@ -80,10 +81,10 @@
 
         <TextView
             android:id="@+id/tvSelectedDate"
+            style="@style/TextAppearance.BigTime.BodyLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp"
             tools:text="2024年12月25日" />
 
         <Button
@@ -98,11 +99,11 @@
 
     <TextView
         android:id="@+id/tvCategoryLabel"
+        style="@style/TextAppearance.BigTime.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="选择分类"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDateLabel" />
 
@@ -119,11 +120,11 @@
 
     <TextView
         android:id="@+id/tvThemeLabel"
+        style="@style/TextAppearance.BigTime.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="选择主题"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
 
