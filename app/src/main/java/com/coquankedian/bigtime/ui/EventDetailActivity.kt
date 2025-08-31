@@ -104,7 +104,7 @@ class EventDetailActivity : AppCompatActivity() {
         binding.btnEdit.setOnClickListener {
             // Open edit dialog
             currentEvent?.let { event ->
-                val intent = Intent(this, MainActivity::class.java).apply {
+                val intent = Intent(this, com.coquankedian.bigtime.MainActivity::class.java).apply {
                     putExtra("open_edit", true)
                     putExtra("event_id", event.id)
                 }

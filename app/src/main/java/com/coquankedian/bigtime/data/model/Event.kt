@@ -3,6 +3,7 @@ package com.coquankedian.bigtime.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ForeignKey
+import androidx.room.Index
 import java.util.Date
 
 @Entity(
@@ -14,7 +15,8 @@ import java.util.Date
             childColumns = ["categoryId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["categoryId"])]
 )
 data class Event(
     @PrimaryKey(autoGenerate = true)
