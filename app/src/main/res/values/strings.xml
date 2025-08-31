@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Day Counter</string>
+
+    <!-- Tab titles -->
+    <string name="tab_all_events">全部事件</string>
+    <string name="tab_categories">分类查看</string>
+    <string name="tab_archived">已归档</string>
+
+    <!-- Empty state -->
+    <string name="no_events_title">还没有事件</string>
+    <string name="no_events_message">点击右下角的 + 按钮添加您的第一个重要事件吧！</string>
+
+    <!-- Event details -->
+    <string name="event_title">事件标题</string>
+    <string name="event_description">事件描述</string>
+    <string name="event_date">日期</string>
+    <string name="event_category">分类</string>
+
+    <!-- Actions -->
+    <string name="add_event">添加事件</string>
+    <string name="edit_event">编辑事件</string>
+    <string name="delete_event">删除事件</string>
+    <string name="archive_event">归档事件</string>
+    <string name="restore_event">恢复事件</string>
+
+    <!-- Categories -->
+    <string name="category_anniversary">纪念日</string>
+    <string name="category_work">工作</string>
+    <string name="category_life">生活</string>
+
+    <!-- Date formats -->
+    <string name="date_format">yyyy年MM月dd日</string>
+    <string name="date_format_with_time">yyyy年MM月dd日 HH:mm</string>
+
+    <!-- Countdown text -->
+    <string name="days_ago">%d天前</string>
+    <string name="days_later">%d天后</string>
+    <string name="today">今天</string>
+    <string name="tomorrow">明天</string>
+    <string name="was_past">已经过去 %d 天</string>
+    <string name="is_today">就在今天！</string>
+    <string name="days_remaining">还有 %d 天</string>
+    <string name="one_day_remaining">还有 1 天</string>
+
+</resources>

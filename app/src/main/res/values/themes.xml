@@ -1,0 +1,258 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.BigTime" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        <!-- Tertiary Colors -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        <!-- Error Colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        <!-- Surface Colors -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+
+        <!-- Background Colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+
+        <!-- Outline Colors -->
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+
+        <!-- Text Appearance -->
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.BigTime.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.BigTime.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.BigTime.DisplaySmall</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.BigTime.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.BigTime.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.BigTime.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.BigTime.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.BigTime.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.BigTime.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.BigTime.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.BigTime.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.BigTime.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.BigTime.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.BigTime.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.BigTime.LabelSmall</item>
+
+        <!-- Component Styles -->
+        <item name="materialButtonStyle">@style/Button.BigTime</item>
+        <item name="materialCardViewStyle">@style/Card.BigTime</item>
+        <item name="chipStyle">@style/Chip.BigTime</item>
+        <item name="textInputStyle">@style/TextInput.BigTime</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheet.BigTime</item>
+    </style>
+
+    <style name="Theme.BigTime" parent="Base.Theme.BigTime" />
+
+    <!-- Text Appearances -->
+    <style name="TextAppearance.BigTime.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">57sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">45sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.009</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.007</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.009</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.017</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.025</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.007</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.041</item>
+    </style>
+
+    <style name="TextAppearance.BigTime.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.045</item>
+    </style>
+
+    <!-- Component Styles -->
+    <style name="Button.BigTime" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Card.BigTime" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="Chip.BigTime" parent="Widget.Material3.Chip.Filter">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipMinHeight">32dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextInput.BigTime" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+    </style>
+
+    <style name="BottomSheet.BigTime" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Material3.BottomSheet.Modal</item>
+    </style>
+
+    <!-- Event Card Styles -->
+    <style name="EventCard.BigTime" parent="Card.BigTime">
+        <item name="cardBackgroundColor">@color/event_card_background</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="android:layout_margin">6dp</item>
+    </style>
+
+    <!-- FAB Style -->
+    <style name="FAB.BigTime" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="tint">@color/on_primary</item>
+    </style>
+
+    <!-- Tab Layout Style -->
+    <style name="TabLayout.BigTime" parent="Widget.Material3.TabLayout">
+        <item name="tabIndicatorColor">@color/primary</item>
+        <item name="tabSelectedTextColor">@color/primary</item>
+        <item name="android:background">@color/surface</item>
+    </style>
+
+</resources>

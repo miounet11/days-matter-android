@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/EventCard.BigTime"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivEventIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_my_calendar"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvEventTitle"
+            style="@style/TextAppearance.BigTime.TitleLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/ivPin"
+            app:layout_constraintStart_toEndOf="@+id/ivEventIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Birthday Party" />
+
+        <ImageView
+            android:id="@+id/ivPin"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/ivLock"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_mylocation"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivLock"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_lock_lock"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvEventDescription"
+            style="@style/TextAppearance.BigTime.BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/on_surface_variant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivEventIcon"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventTitle"
+            tools:text="Celebrating John's 30th birthday" />
+
+        <TextView
+            android:id="@+id/tvCountdown"
+            style="@style/TextAppearance.BigTime.TitleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivEventIcon"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventDescription"
+            tools:text="还有 15 天" />
+
+        <TextView
+            android:id="@+id/tvEventDate"
+            style="@style/TextAppearance.BigTime.BodySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/on_surface_variant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivEventIcon"
+            app:layout_constraintTop_toBottomOf="@+id/tvCountdown"
+            tools:text="2024年12月25日" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            style="@style/TextAppearance.BigTime.LabelSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/category_chip_background"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toEndOf="@+id/ivEventIcon"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventDate"
+            tools:text="Anniversary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
