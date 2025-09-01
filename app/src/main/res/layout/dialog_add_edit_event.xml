@@ -119,6 +119,113 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel" />
 
     <TextView
+        android:id="@+id/tvRepeatLabel"
+        style="@style/TextAppearance.BigTime.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="重复设置"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
+
+    <Spinner
+        android:id="@+id/spinnerRepeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/spinner_background"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepeatLabel" />
+
+    <TextView
+        android:id="@+id/tvReminderLabel"
+        style="@style/TextAppearance.BigTime.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="提醒设置"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerRepeat" />
+
+    <LinearLayout
+        android:id="@+id/layoutReminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@drawable/date_selector_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvReminderLabel">
+
+        <Switch
+            android:id="@+id/switchReminder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="启用提醒"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spinnerReminderTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:background="@drawable/spinner_background" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCalendarLabel"
+        style="@style/TextAppearance.BigTime.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="历法选择"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutReminder" />
+
+    <LinearLayout
+        android:id="@+id/layoutCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@drawable/date_selector_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalendarLabel">
+
+        <RadioGroup
+            android:id="@+id/rgCalendarType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbSolarCalendar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="公历"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/rbLunarCalendar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="农历" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/tvThemeLabel"
         style="@style/TextAppearance.BigTime.TitleMedium"
         android:layout_width="wrap_content"
@@ -126,7 +233,7 @@
         android:layout_marginBottom="8dp"
         android:text="选择主题"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutCalendar" />
 
     <Button
         android:id="@+id/btnSelectTheme"
@@ -146,7 +253,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategory">
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectTheme">
 
         <Button
             android:id="@+id/btnCancel"

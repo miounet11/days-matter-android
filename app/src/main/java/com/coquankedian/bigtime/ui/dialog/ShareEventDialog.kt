@@ -9,10 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.coquankedian.bigtime.R
 import com.coquankedian.bigtime.data.model.Event
 import com.coquankedian.bigtime.databinding.DialogShareEventBinding
+import com.coquankedian.bigtime.utils.ImageGenerator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -104,8 +110,44 @@ class ShareEventDialog : DialogFragment() {
     }
 
     private fun shareAsImage() {
-        // TODO: Implement image sharing with event card screenshot
-        Toast.makeText(requireContext(), "图片分享功能即将上线", Toast.LENGTH_SHORT).show()
+        event?.let { currentEvent ->
+            // Show loading toast
+            Toast.makeText(requireContext(), "正在生成图片...", Toast.LENGTH_SHORT).show()
+            
+            lifecycleScope.launch(Dispatchers.IO) {
+                val imageGenerator = ImageGenerator(requireContext())
+                val imageFile = imageGenerator.generateEventImage(currentEvent)
+                
+                withContext(Dispatchers.Main) {
+                    if (imageFile != null) {
+                        try {
+                            val uri = FileProvider.getUriForFile(
+                                requireContext(),
+                                "${requireContext().packageName}.fileprovider",
+                                imageFile
+                            )
+                            
+                            val shareIntent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                type = "image/png"
+                                putExtra(Intent.EXTRA_STREAM, uri)
+                                putExtra(Intent.EXTRA_TEXT, "来自 Days Matter - 重要日子倒计时")
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            
+                            val chooserIntent = Intent.createChooser(shareIntent, "分享图片")
+                            startActivity(chooserIntent)
+                            dismiss()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            Toast.makeText(requireContext(), "分享失败：${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "生成图片失败，请重试", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun copyToClipboard(text: String) {

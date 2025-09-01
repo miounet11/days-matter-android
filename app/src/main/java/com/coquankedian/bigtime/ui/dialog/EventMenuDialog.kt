@@ -25,11 +25,16 @@ class EventMenuDialog : DialogFragment() {
 
     private var event: Event? = null
 
-    // TODO: Use proper dependency injection
-    private val eventViewModel: EventViewModel by lazy {
-        val database = com.coquankedian.bigtime.data.database.AppDatabase.getDatabase(requireContext(), kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
-        val repository = com.coquankedian.bigtime.data.repository.AppRepository(database.eventDao(), database.categoryDao())
-        com.coquankedian.bigtime.ui.EventViewModel(repository)
+    private val eventViewModel: EventViewModel by viewModels {
+        val database = com.coquankedian.bigtime.data.database.AppDatabase.getDatabase(
+            requireContext(),
+            kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO)
+        )
+        val repository = com.coquankedian.bigtime.data.repository.AppRepository(
+            database.eventDao(),
+            database.categoryDao()
+        )
+        EventViewModelFactory(repository)
     }
 
     override fun onCreateView(

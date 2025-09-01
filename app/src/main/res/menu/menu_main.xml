@@ -3,9 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="搜索"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        
+    <item
+        android:id="@+id/action_date_calculator"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
+        android:title="日期计算器"
+        app:showAsAction="never" />
+        
+    <item
+        android:id="@+id/action_backup"
+        android:icon="@drawable/ic_baseline_save_alt_24"
+        android:title="备份数据"
+        app:showAsAction="never" />
+        
+    <item
+        android:id="@+id/action_restore"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="恢复数据"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="设置"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
 </menu>

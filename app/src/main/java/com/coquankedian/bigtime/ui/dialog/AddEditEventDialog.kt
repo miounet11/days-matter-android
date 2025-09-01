@@ -20,6 +20,7 @@ import com.coquankedian.bigtime.ui.CategoryViewModel
 import com.coquankedian.bigtime.ui.CategoryViewModelFactory
 import com.coquankedian.bigtime.ui.EventViewModel
 import com.coquankedian.bigtime.ui.EventViewModelFactory
+import com.coquankedian.bigtime.utils.LunarCalendar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +34,10 @@ class AddEditEventDialog : DialogFragment() {
     private var selectedCardBackgroundColor: Int = android.graphics.Color.WHITE
     private var selectedTextColor: Int = android.graphics.Color.BLACK
     private var selectedIconResId: Int = android.R.drawable.ic_menu_my_calendar
+    private var selectedRepeatType: String = "NONE"
+    private var reminderEnabled: Boolean = false
+    private var reminderMinutes: Int = 1440 // Default 1 day before
+    private var isLunarCalendar: Boolean = false
     private var editingEvent: Event? = null
 
     // TODO: Use proper dependency injection
@@ -66,6 +71,9 @@ class AddEditEventDialog : DialogFragment() {
         setupUI()
         setupDatePicker()
         setupCategorySpinner()
+        setupRepeatSpinner()
+        setupReminderControls()
+        setupCalendarTypeControls()
         setupButtons()
         loadEventDataIfEditing()
     }
@@ -87,20 +95,34 @@ class AddEditEventDialog : DialogFragment() {
         updateDateDisplay()
 
         binding.btnSelectDate.setOnClickListener {
-            val datePicker = DatePickerDialog.newInstance()
-            datePicker.setOnDateSelectedListener { year, month, dayOfMonth ->
-                val calendar = Calendar.getInstance()
-                calendar.set(year, month, dayOfMonth)
-                selectedDate = calendar.time
-                updateDateDisplay()
+            if (isLunarCalendar) {
+                val lunarDatePicker = LunarDatePickerDialog.newInstance()
+                lunarDatePicker.setOnDateSelectedListener { date ->
+                    selectedDate = date
+                    updateDateDisplay()
+                }
+                lunarDatePicker.show(childFragmentManager, "LunarDatePicker")
+            } else {
+                val datePicker = DatePickerDialog.newInstance()
+                datePicker.setOnDateSelectedListener { year, month, dayOfMonth ->
+                    val calendar = Calendar.getInstance()
+                    calendar.set(year, month, dayOfMonth)
+                    selectedDate = calendar.time
+                    updateDateDisplay()
+                }
+                datePicker.show(childFragmentManager, "DatePicker")
             }
-            datePicker.show(childFragmentManager, "DatePicker")
         }
     }
 
     private fun updateDateDisplay() {
-        val dateFormat = SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault())
-        binding.tvSelectedDate.text = dateFormat.format(selectedDate)
+        if (isLunarCalendar) {
+            val lunarDate = LunarCalendar.solarToLunar(selectedDate)
+            binding.tvSelectedDate.text = LunarCalendar.formatLunarDate(lunarDate)
+        } else {
+            val dateFormat = SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault())
+            binding.tvSelectedDate.text = dateFormat.format(selectedDate)
+        }
     }
 
     private fun setupCategorySpinner() {
@@ -118,6 +140,60 @@ class AddEditEventDialog : DialogFragment() {
             if (defaultIndex >= 0) {
                 binding.spinnerCategory.setSelection(defaultIndex)
             }
+        }
+    }
+
+    private fun setupRepeatSpinner() {
+        val repeatOptions = arrayOf("不重复", "每日", "每周", "每月", "每年")
+        val repeatValues = arrayOf("NONE", "DAILY", "WEEKLY", "MONTHLY", "YEARLY")
+        
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            repeatOptions
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerRepeat.adapter = adapter
+        
+        val defaultIndex = repeatValues.indexOf(selectedRepeatType)
+        if (defaultIndex >= 0) {
+            binding.spinnerRepeat.setSelection(defaultIndex)
+        }
+    }
+
+    private fun setupReminderControls() {
+        val reminderOptions = arrayOf("提前1小时", "提前1天", "提前1周", "提前1月")
+        val reminderValues = arrayOf(60, 1440, 10080, 43200) // minutes
+        
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            reminderOptions
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerReminderTime.adapter = adapter
+        
+        binding.switchReminder.isChecked = reminderEnabled
+        binding.spinnerReminderTime.isEnabled = reminderEnabled
+        
+        val defaultIndex = reminderValues.indexOf(reminderMinutes)
+        if (defaultIndex >= 0) {
+            binding.spinnerReminderTime.setSelection(defaultIndex)
+        }
+        
+        binding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
+            reminderEnabled = isChecked
+            binding.spinnerReminderTime.isEnabled = isChecked
+        }
+    }
+
+    private fun setupCalendarTypeControls() {
+        binding.rbSolarCalendar.isChecked = !isLunarCalendar
+        binding.rbLunarCalendar.isChecked = isLunarCalendar
+        
+        binding.rgCalendarType.setOnCheckedChangeListener { _, checkedId ->
+            isLunarCalendar = checkedId == R.id.rbLunarCalendar
+            updateDateDisplay() // Update date display based on calendar type
         }
     }
 
@@ -144,7 +220,16 @@ class AddEditEventDialog : DialogFragment() {
             selectedCardBackgroundColor = event.cardBackgroundColor
             selectedTextColor = event.textColor
             event.iconResId?.let { selectedIconResId = it }
+            selectedRepeatType = event.repeatType
+            reminderEnabled = event.reminderEnabled
+            reminderMinutes = event.reminderMinutes
+            isLunarCalendar = event.isLunarCalendar
+            
+            // Update UI with loaded values
             updateDateDisplay()
+            setupRepeatSpinner()
+            setupReminderControls()
+            setupCalendarTypeControls()
         }
     }
 
@@ -175,6 +260,22 @@ class AddEditEventDialog : DialogFragment() {
             }
         }
 
+        // Get selected repeat type
+        val repeatOptions = arrayOf("NONE", "DAILY", "WEEKLY", "MONTHLY", "YEARLY")
+        val repeatPosition = binding.spinnerRepeat.selectedItemPosition
+        if (repeatPosition in repeatOptions.indices) {
+            selectedRepeatType = repeatOptions[repeatPosition]
+        }
+
+        // Get selected reminder time
+        if (reminderEnabled) {
+            val reminderValues = arrayOf(60, 1440, 10080, 43200) // minutes
+            val reminderPosition = binding.spinnerReminderTime.selectedItemPosition
+            if (reminderPosition in reminderValues.indices) {
+                reminderMinutes = reminderValues[reminderPosition]
+            }
+        }
+
         val event = Event(
             id = editingEvent?.id ?: 0,
             title = title,
@@ -183,7 +284,11 @@ class AddEditEventDialog : DialogFragment() {
             categoryId = selectedCategoryId,
             cardBackgroundColor = selectedCardBackgroundColor,
             textColor = selectedTextColor,
-            iconResId = selectedIconResId
+            iconResId = selectedIconResId,
+            repeatType = selectedRepeatType,
+            reminderEnabled = reminderEnabled,
+            reminderMinutes = reminderMinutes,
+            isLunarCalendar = isLunarCalendar
         )
 
         if (editingEvent == null) {

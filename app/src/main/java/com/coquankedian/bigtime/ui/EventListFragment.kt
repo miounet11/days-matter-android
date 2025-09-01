@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.lifecycle.LiveData
 import com.coquankedian.bigtime.R
 import com.coquankedian.bigtime.data.model.Event
 import com.coquankedian.bigtime.data.repository.AppRepository
@@ -28,13 +29,19 @@ class EventListFragment : Fragment() {
 
     private lateinit var eventAdapter: EventDaysMatterAdapter
     private var isGridView = false
+    private var currentSearchQuery: String? = null
+    private var isSearching = false
 
-    // TODO: Use proper dependency injection
-    private val eventViewModel: EventViewModel by lazy {
-        // For now, create a simple implementation
-        val database = com.coquankedian.bigtime.data.database.AppDatabase.getDatabase(requireContext(), kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
-        val repository = com.coquankedian.bigtime.data.repository.AppRepository(database.eventDao(), database.categoryDao())
-        com.coquankedian.bigtime.ui.EventViewModel(repository)
+    private val eventViewModel: EventViewModel by viewModels {
+        val database = com.coquankedian.bigtime.data.database.AppDatabase.getDatabase(
+            requireContext(),
+            kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO)
+        )
+        val repository = com.coquankedian.bigtime.data.repository.AppRepository(
+            database.eventDao(),
+            database.categoryDao()
+        )
+        EventViewModelFactory(repository, requireActivity().application)
     }
 
     override fun onCreateView(
@@ -104,6 +111,8 @@ class EventListFragment : Fragment() {
     }
     
     fun filterByCategory(categoryId: Long?, pinnedOnly: Boolean) {
+        if (isSearching) return // Don't change filter during search
+        
         if (pinnedOnly) {
             // Show only pinned events
             eventViewModel.pinnedEvents.observe(viewLifecycleOwner) { events ->
@@ -115,8 +124,65 @@ class EventListFragment : Fragment() {
         }
     }
     
+    fun searchEvents(query: String) {
+        currentSearchQuery = query
+        isSearching = true
+        
+        eventViewModel.searchEvents(query).observe(viewLifecycleOwner) { events ->
+            updateEventList(events)
+            // Hide pinned event card during search
+            binding.pinnedEventCard.root.visibility = android.view.View.GONE
+        }
+    }
+    
+    fun clearSearch() {
+        currentSearchQuery = null
+        isSearching = false
+        
+        // Return to normal event observation
+        observeEvents()
+    }
+    
     private fun updatePinnedEventCard(event: Event?) {
-        // TODO: Update the pinned event card in the main layout
+        if (event != null && event.isPinned) {
+            // Show pinned event card
+            binding.pinnedEventCard.root.visibility = android.view.View.VISIBLE
+            
+            // Update pinned event card content
+            binding.pinnedEventCard.tvPinnedTitle.text = event.title
+            binding.pinnedEventCard.tvPinnedDaysNumber.text = Math.abs(event.daysUntil).toString()
+            
+            // Update days label based on whether it's future or past
+            val daysLabel = when {
+                event.daysUntil > 0 -> "天后"
+                event.daysUntil < 0 -> "天前"
+                else -> "今天"
+            }
+            binding.pinnedEventCard.tvPinnedDaysLabel.text = daysLabel
+            
+            // Format and display date
+            val dateFormat = java.text.SimpleDateFormat("yyyy年MM月dd日", java.util.Locale.CHINA)
+            binding.pinnedEventCard.tvPinnedDate.text = dateFormat.format(event.date)
+            
+            // Show description if available
+            if (!event.description.isNullOrEmpty()) {
+                binding.pinnedEventCard.tvPinnedDescription.visibility = android.view.View.VISIBLE
+                binding.pinnedEventCard.tvPinnedDescription.text = event.description
+            } else {
+                binding.pinnedEventCard.tvPinnedDescription.visibility = android.view.View.GONE
+            }
+            
+            // Set category name
+            binding.pinnedEventCard.tvPinnedCategory.text = getCategoryName(event.categoryId)
+            
+            // Set card click listener
+            binding.pinnedEventCard.root.setOnClickListener {
+                showEventDetails(event)
+            }
+        } else {
+            // Hide pinned event card if no pinned event
+            binding.pinnedEventCard.root.visibility = android.view.View.GONE
+        }
     }
 
     private fun updateEventList(events: List<Event>) {

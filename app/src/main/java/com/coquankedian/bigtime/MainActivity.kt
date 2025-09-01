@@ -9,12 +9,15 @@ import androidx.viewpager2.widget.ViewPager2
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import com.coquankedian.bigtime.databinding.ActivityMainDrawerBinding
 import com.coquankedian.bigtime.ui.ArchivedEventFragment
 import com.coquankedian.bigtime.ui.CategoryFragment
 import com.coquankedian.bigtime.ui.EventListFragment
 import com.coquankedian.bigtime.ui.ViewPagerAdapter
 import com.coquankedian.bigtime.ui.SettingsActivity
+import com.coquankedian.bigtime.ui.DateCalculatorActivity
+import com.coquankedian.bigtime.data.backup.BackupManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import androidx.core.view.GravityCompat
@@ -120,6 +123,34 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        
+        // Setup SearchView
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as? SearchView
+        
+        searchView?.let { sv ->
+            sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    performSearch(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        clearSearch()
+                    } else {
+                        performSearch(newText)
+                    }
+                    return true
+                }
+            })
+            
+            sv.setOnCloseListener {
+                clearSearch()
+                false
+            }
+        }
+        
         return true
     }
 
@@ -127,6 +158,18 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
+                true
+            }
+            R.id.action_date_calculator -> {
+                startActivity(Intent(this, DateCalculatorActivity::class.java))
+                true
+            }
+            R.id.action_backup -> {
+                performBackup()
+                true
+            }
+            R.id.action_restore -> {
+                performRestore()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -149,10 +192,63 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun filterEventsByCategory(categoryId: Long?, pinnedOnly: Boolean) {
-        // Get the current EventListFragment and update its filter
-        val currentFragment = supportFragmentManager.findFragmentByTag("f${binding.viewPager.currentItem}")
-        if (currentFragment is EventListFragment) {
-            currentFragment.filterByCategory(categoryId, pinnedOnly)
+        // Get the EventListFragment from the ViewPager
+        val fragments = supportFragmentManager.fragments
+        for (fragment in fragments) {
+            // Find the EventListFragment in the ViewPager
+            if (fragment is EventListFragment) {
+                fragment.filterByCategory(categoryId, pinnedOnly)
+                break
+            }
+        }
+    }
+    
+    private fun performSearch(query: String?) {
+        if (query.isNullOrEmpty()) {
+            clearSearch()
+            return
+        }
+        
+        // Get the EventListFragment and perform search
+        val fragments = supportFragmentManager.fragments
+        for (fragment in fragments) {
+            if (fragment is EventListFragment) {
+                fragment.searchEvents(query)
+                break
+            }
+        }
+    }
+    
+    private fun clearSearch() {
+        // Clear search and return to normal view
+        val fragments = supportFragmentManager.fragments
+        for (fragment in fragments) {
+            if (fragment is EventListFragment) {
+                fragment.clearSearch()
+                break
+            }
+        }
+    }
+    
+    private fun performBackup() {
+        val backupManager = BackupManager(this)
+        backupManager.exportData { success, message ->
+            runOnUiThread {
+                android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    
+    private fun performRestore() {
+        val backupManager = BackupManager(this)
+        backupManager.importData { success, message ->
+            runOnUiThread {
+                android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show()
+                if (success) {
+                    // Refresh the current fragment
+                    recreate()
+                }
+            }
         }
     }
     

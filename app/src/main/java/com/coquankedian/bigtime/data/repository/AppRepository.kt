@@ -2,13 +2,16 @@ package com.coquankedian.bigtime.data.repository
 
 import com.coquankedian.bigtime.data.dao.CategoryDao
 import com.coquankedian.bigtime.data.dao.EventDao
+import com.coquankedian.bigtime.data.dao.NotebookDao
 import com.coquankedian.bigtime.data.model.Category
 import com.coquankedian.bigtime.data.model.Event
+import com.coquankedian.bigtime.data.model.Notebook
 import kotlinx.coroutines.flow.Flow
 
 class AppRepository(
     private val eventDao: EventDao,
-    private val categoryDao: CategoryDao
+    private val categoryDao: CategoryDao,
+    private val notebookDao: NotebookDao
 ) {
 
     // Event operations
@@ -67,4 +70,39 @@ class AppRepository(
 
     suspend fun deleteCustomCategory(categoryId: Long): Int =
         categoryDao.deleteCustomCategory(categoryId)
+
+    // Notebook operations
+    val allNotebooks: Flow<List<Notebook>> = notebookDao.getAllNotebooks()
+    val visibleNotebooks: Flow<List<Notebook>> = notebookDao.getVisibleNotebooks()
+    val defaultNotebooks: Flow<List<Notebook>> = notebookDao.getDefaultNotebooks()
+    val customNotebooks: Flow<List<Notebook>> = notebookDao.getCustomNotebooks()
+    val notebooksCount: Flow<Int> = notebookDao.getNotebooksCount()
+    val customNotebooksCount: Flow<Int> = notebookDao.getCustomNotebooksCount()
+
+    suspend fun getNotebookById(notebookId: Long): Notebook? =
+        notebookDao.getNotebookById(notebookId)
+
+    suspend fun getNotebookByName(name: String): Notebook? =
+        notebookDao.getNotebookByName(name)
+
+    suspend fun insertNotebook(notebook: Notebook): Long =
+        notebookDao.insertNotebook(notebook)
+
+    suspend fun updateNotebook(notebook: Notebook) =
+        notebookDao.updateNotebook(notebook)
+
+    suspend fun deleteNotebook(notebook: Notebook) =
+        notebookDao.deleteNotebook(notebook)
+
+    suspend fun deleteCustomNotebook(notebookId: Long): Int =
+        notebookDao.deleteCustomNotebook(notebookId)
+
+    suspend fun updateNotebookVisibility(notebookId: Long, isHidden: Boolean) =
+        notebookDao.updateNotebookVisibility(notebookId, isHidden)
+
+    suspend fun updateNotebookSortOrder(notebookId: Long, sortOrder: Int) =
+        notebookDao.updateNotebookSortOrder(notebookId, sortOrder)
+
+    suspend fun updateEventCount(notebookId: Long) =
+        notebookDao.updateEventCount(notebookId)
 }

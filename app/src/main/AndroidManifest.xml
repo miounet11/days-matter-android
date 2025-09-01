@@ -39,6 +39,11 @@
             android:name=".ui.EventDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.BigTime.NoActionBar" />
+            
+        <activity
+            android:name=".ui.DateCalculatorActivity"
+            android:exported="false"
+            android:label="日期计算器" />
 
         <!-- FileProvider for sharing images -->
         <provider
